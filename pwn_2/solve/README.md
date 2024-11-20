@@ -2,15 +2,15 @@
 
 Mi primera interacción es conectarme al servidor con `nc` e intentar meter una cadena de caracteres muy larga para ver que ocurre. Vemos que esta vez no es tan sencillo pues a pesar de conseguir hacer bufferoverflow, intenta mostrarnos la flag, sin embargo no puedo porque no se encuentra en el mismo directorio en el servidor. Una pista que nos da es que se encuentra en la carpeta.
 
-![image.png](image/image_1.png)
+![image.png](images/image_1.png)
 
 Me descago el código correspondiente al reto, y lo primero que hacemos es mandarlo a ghidra, para ver como se ha compilado y observar las funciones. Para ver las funciones usamos gdb listando con el comando
 
-![Screenshot 2024-11-18 at 19.47.52.png](image/image_2.png)
+![Screenshot 2024-11-18 at 19.47.52.png](images/image_2.png)
 
 La funcion que nos interesa obtener es give_shell, pues con ella podremos movernos hasta el directorio `/tmp/flag.txt` . En ghidra vamos a calcular el tamaño del buffer de esa funcion, para intentar pisar los siguientes valores y conseguir que salte a la función `give_shell`.
 
-![Screenshot 2024-11-18 at 19.43.43.png](image/image_3.png)
+![Screenshot 2024-11-18 at 19.43.43.png](images/image_3.png)
 
 El tamaño del buffer es de `0x60` (96 bytes) lo cual, deberemos insertar esa cantidad para llenar el buffer y conseguiremos acceso a la shell.
 
@@ -62,7 +62,7 @@ Tras ejecutarlo con: `python3 script_2.py` obtenemos el siguiente resultado:
 
 Parece que hemos conseguido saltar a la función `gife_shell`.
 
-![image.png](image/image_4.png)
+![image.png](images/image_4.png)
 
 Todo esto lo hemos realizado de manera local, es decir, no conseguimos nada. Ahora ejecutaremos el script pero esta vez pasandole los parámetros de la conexión con el servidor.
 
@@ -70,7 +70,7 @@ Todo esto lo hemos realizado de manera local, es decir, no conseguimos nada. Aho
 
 Y parece que obtenemos la reversh shell aunque a pesar de todo no nos devuelve nada:
 
-![Screenshot 2024-11-19 at 09.36.02.png](image/image_5.png)
+![Screenshot 2024-11-19 at 09.36.02.png](images/image_5.png)
 
 Vemos que no nos funciona no sabemos porque. Cambiamos el codigo para que no tengamos que introducir nosotros comandos adicionales, sino que el mismo escriba la lectura de la flag.
 
@@ -126,4 +126,4 @@ io.close()
 
 Con esto, obtendriamos el siguiente resultado:
 
-![image.png](image/image_6.png)
+![image.png](images/image_6.png)
