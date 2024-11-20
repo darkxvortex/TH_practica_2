@@ -1,0 +1,18 @@
+version: '3'
+services:
+  shop:
+    build: .
+    ports:
+      - "12104:8080"
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/healthcheck" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M

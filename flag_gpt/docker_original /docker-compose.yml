@@ -1,0 +1,21 @@
+services:
+  underconstr:
+    build: .
+    container_name: underconstr
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+      - 12102:8080
+    environment:
+    - "CHALLENGE_FLAG=flag{empty}"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 400M
+    

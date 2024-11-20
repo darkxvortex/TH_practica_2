@@ -1,0 +1,21 @@
+services:
+  magicword:
+    build: .
+    container_name: magicword
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s  
+    ports:
+      - 12101:8080
+    environment:
+    - "CHALLENGE_FLAG=flag{placeholder}"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M
+

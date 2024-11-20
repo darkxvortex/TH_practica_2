@@ -1,0 +1,12 @@
+services:
+  pwnthemall:
+    build: .
+    platform: linux/amd64
+    restart: on-failure
+    ports:
+      - 9991:9991
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 400M

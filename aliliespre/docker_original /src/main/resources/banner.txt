@@ -1,0 +1,19 @@
+
+UUUUUUUU     UUUUUUUURRRRRRRRRRRRRRRRR             JJJJJJJJJJJ      CCCCCCCCCCCCC
+U::::::U     U::::::UR::::::::::::::::R            J:::::::::J   CCC::::::::::::C
+U::::::U     U::::::UR::::::RRRRRR:::::R           J:::::::::J CC:::::::::::::::C
+UU:::::U     U:::::UURR:::::R     R:::::R          JJ:::::::JJC:::::CCCCCCCC::::C
+ U:::::U     U:::::U   R::::R     R:::::R            J:::::J C:::::C       CCCCCC
+ U:::::D     D:::::U   R::::R     R:::::R            J:::::JC:::::C              
+ U:::::D     D:::::U   R::::RRRRRR:::::R             J:::::JC:::::C              
+ U:::::D     D:::::U   R:::::::::::::RR              J:::::jC:::::C              
+ U:::::D     D:::::U   R::::RRRRRR:::::R             J:::::JC:::::C              
+ U:::::D     D:::::U   R::::R     R:::::RJJJJJJJ     J:::::JC:::::C              
+ U:::::D     D:::::U   R::::R     R:::::RJ:::::J     J:::::JC:::::C              
+ U::::::U   U::::::U   R::::R     R:::::RJ::::::J   J::::::J C:::::C       CCCCCC
+ U:::::::UUU:::::::U RR:::::R     R:::::RJ:::::::JJJ:::::::J  C:::::CCCCCCCC::::C
+  UU:::::::::::::UU  R::::::R     R:::::R JJ:::::::::::::JJ    CC:::::::::::::::C
+    UU:::::::::UU    R::::::R     R:::::R   JJ:::::::::JJ        CCC::::::::::::C
+      UUUUUUUUU      RRRRRRRR     RRRRRRR     JJJJJJJJJ             CCCCCCCCCCCCC
+                                                                                 
+                                                                                 
