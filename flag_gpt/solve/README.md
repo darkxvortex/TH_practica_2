@@ -6,7 +6,7 @@ Lo primero que llama la atención es el archivo `server.js`, el cual si lo anali
 
 Viendo el código nos fijamos en esta parte:
 
-![Screenshot 2024-11-20 at 13.27.21.png](images/Screenshot_2024-11-20_at_13.27.21.png)
+![Screenshot 2024-11-20 at 13.27.21.png](images/image_1.png)
 
 Vemos que para llegar al `else` final debemos cumplir las siguientes condiciones:
 
@@ -17,8 +17,8 @@ Vemos que para llegar al `else` final debemos cumplir las siguientes condiciones
 
 Si realizamos la solicitud de esta manera nos damos cuenta que no conseguimos nada. Si nos fijamos el propio código, vemos que nos da un tip: que el contex-type sea de tipo application/json. Cambiando esto desde el repeter en burpsuit llegamos a una solicitud que tiene esta pinta:
 
-![Screenshot 2024-11-20 at 12.40.02.png](images/9ae1dfce-f56a-4bf3-a70e-e93768d9bc2e.png)
+![Screenshot 2024-11-20 at 12.40.02.png](images/image_2.png)
 
 Y veremos que la respuesta del servidor, ya nos devuelve la flag
 
-![image.png](images/0fad98cb-2890-4e22-819f-ad25cd0cfd3e.png)
+![image.png](images/image_3.png)
