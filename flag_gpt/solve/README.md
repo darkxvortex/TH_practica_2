@@ -82,7 +82,7 @@ Se me ocurre revisar las clases java y veo que se esta solicitando un paquete ll
 
 Tras no obtener ninguna información de ello de manera local vuelvo a probar con directorios comunes en linux. Y tras una larga busqueda y unos cuantos intentos caigo en el directorio `/proc/self/environ` el cual tiene la flag guardada.
 
-![Screenshot 2024-11-20 at 16.08.55.png](images/images_1)
+![Screenshot 2024-11-20 at 16.08.55.png](images/image_1)
 
 A pesar de haber conseguido la flag un poco de manera “aleatoria” no encuentro ningun sitio en el archivo local donde se encuentre la parte en la que se escribe `CHALLENGE_FLAG` en un archivo.
 
