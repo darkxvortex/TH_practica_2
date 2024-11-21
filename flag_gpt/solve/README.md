@@ -84,7 +84,7 @@ Tras no obtener ninguna información de ello de manera local vuelvo a probar con
 
 ![image_1](images/image_1.png)
 
-A pesar de haber conseguido la flag un poco de manera “aleatoria” no encuentro ningun sitio en el archivo local donde se encuentre la parte en la que se escribe `CHALLENGE_FLAG` en un archivo.
+A pesar de haber conseguido la flag un poco de manera “aleatoria” no encuentro ningún archivo/indicio en la maquina montada localmente donde pueda escribir la variable `CHALLENGE_FLAG` en el archivo ubicado en `/proc/self/environ`. Preguntar donde esta
 
 ---
 
