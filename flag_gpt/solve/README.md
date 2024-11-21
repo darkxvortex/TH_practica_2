@@ -1,24 +1,91 @@
-# porfaplis
+Nos encontramos con una web basica, con `index.html` y `styles.css`.
 
-Para resolver este reto, lo montamos primero en local con docker. 
+Analizando el código proporcionado veo que el código principal es estatico, y que contiene el siguiente archivo de javascript:
 
-Lo primero que llama la atención es el archivo `server.js`, el cual si lo analizamos vemos que dependiendo de que tipo de solicitud hagamos al la pagina web, actuará de una manera u otra.
+```jsx
+package th.challs.underconstruction;
 
-Viendo el código nos fijamos en esta parte:
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-![Screenshot 2024-11-20 at 13.27.21.png](images/image_1.png)
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-Vemos que para llegar al `else` final debemos cumplir las siguientes condiciones:
+@Controller
+public class Web {
+    public static final String STATIC_PATH = "/app/src/main/resources/static/";
+    private static Logger logger = LoggerFactory.getLogger(Web.class);
 
-- Primero de todo, que con el metodo `POST`, pedir `/givemeflag`.
-- Como vemos que el código existen dos variables: `user` y `magicword`, las cuales se encuentran en los parametros del body de la request.
-    - Para el `user`, añadiremos la calve `user` con valor `admin`.
-    - Para la `magicword`, vemos que la cadena de texto `cHJldHR5IHBsZWFzZSA6Mw==` está en base64. Descrifrado a texto en claro vemos que el texto es `pretty please :3`. Lo que hace es convertir esa magic word a binario con la funcion `btoa` y lo comprueba.
+    @GetMapping("/")
+    @ResponseBody
+    public byte[] index() throws IOException {
+        // https://media.giphy.com/media/ANbD1CCdA3iI8/giphy.gif
+        return Files.readAllBytes(Path.of(STATIC_PATH, "index.html"));
+    }
 
-Si realizamos la solicitud de esta manera nos damos cuenta que no conseguimos nada. Si nos fijamos el propio código, vemos que nos da un tip: que el contex-type sea de tipo application/json. Cambiando esto desde el repeter en burpsuit llegamos a una solicitud que tiene esta pinta:
+    @GetMapping("/healthcheck")
+    @ResponseBody
+    public String healthcheck(){
+        logger.info("Health ok");
+        return "Health ok";
+    }
 
-![Screenshot 2024-11-20 at 12.40.02.png](images/image_2.png)
+    @GetMapping("/file")
+    @ResponseBody
+    public byte[] serveFile(@RequestParam String filename) throws IOException {
+        logger.info("Serving file: {}", filename);
+        return Files.readAllBytes(Path.of(STATIC_PATH, filename));
+    }
+}
+```
 
-Y veremos que la respuesta del servidor, ya nos devuelve la flag
+Me fijo en la ultima función la cual se incluye cuando se pide a la web `/file`, y esta misma observa el parametro `filename` y lee el archivo que se pide en el directorio `STATIC_PATH` el cual ha sido definido al principio: `/app/src/main/resources/static/`. 
 
-![image.png](images/image_3.png)
+Lo primero que pienso es comprobar si la pagina web esta protegida contra el ataque path traversal. Para ello comprobamos que podemos visualizar el archivo `/etc/passwd` por lo que podremos visualizar cualquier archivo dentro de la maquina.
+
+Aquí es donde viene el principal problema, ¿donde busco?
+
+Lo primero que hago es empezar a buscar sitios clasicos como:
+
+- `/home/flag.txt`
+- `/root/flag.txt`
+- `/flag.txt`
+
+Sin embargo me doy cuenta que estoy asumiendo que el archivo que contiene la flag se llama `flag.txt`.
+
+Observando los archivos para montar el entorno, veo que en el archivo `docker-compose.yml` una variable de entorno llamada `CHALLENGE_FLAG` (como en todos los retos). Y empiezo a buscar en que parte del entorno montado puede estar escribiendo la flag en algun archivo dentro del sistema.
+
+Lo que he llegado a sacar es que para montar el contenedor docker, el archivo `Dockerfile` emplea la aplicación maven, que tras una busqueda rápida, veo que es una herramienta para gestionar productos basados en java. Y tras ver la siguiente linea:
+
+```jsx
+CMD ["mvn", "spring-boot:run"]
+```
+
+veo que se están ejecutando `mvn` para montar todo el entorno de java. Decido mandarlo a un log, para examinarlo y ver si es el que está asignado el valor de la flag a algún archivo. Sin embargo lo único que encontramos de las 1298 lineas, son estas dos coincidencias:
+
+```jsx
+❯ cat log.txt | grep -n "FLAG"
+450:[DEBUG] env.CHALLENGE_FLAG: flag{empty}
+842:[DEBUG] env.CHALLENGE_FLAG: flag{empty}
+```
+
+Y viendo el contexto no sacamos donde puede estar escribiendo la flag.
+
+Intento hacer un grep local para buscar algún archivo donde encuentre la variable `CHALLANGE_FLAG` redirigiendo los errores a null para tener una salida limpiar pero no encontramos nada: `grep -r "CHALLENGE_FLAG" / 2>/dev/null`.
+
+Se me ocurre revisar las clases java y veo que se esta solicitando un paquete llamado `th.challs.underconstruction` pero tras inspeccionar dentro del direcctorio `/app/target` y tras extraer con el comando `jar xf underconstruction-0.0.1-SNAPSHOT.jar.original` no encuentro nada relacionado con el path donde se puede estar guardando la flag.
+
+Tras no obtener ninguna información de ello de manera local vuelvo a probar con directorios comunes en linux. Y tras una larga busqueda y unos cuantos intentos caigo en el directorio `/proc/self/environ` el cual tiene la flag guardada.
+
+![Screenshot 2024-11-20 at 16.08.55.png](images/images_1)
+
+A pesar de haber conseguido la flag un poco de manera “aleatoria” no encuentro ningun sitio en el archivo local donde se encuentre la parte en la que se escribe `CHALLENGE_FLAG` en un archivo.
+
+---
+
+Escrito despues de haber encontrado la flag: podría haber utilizado burpsuit para automatizar la busquedad de archivos comunes en maquinas linux como pueden ser el `/etc/passwd`, `/etc/shadow`, etc; y luego haber filtrado las salidas para buscar la palabra `URJC{`.
