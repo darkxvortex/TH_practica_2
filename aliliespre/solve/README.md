@@ -35,7 +35,7 @@ En este caso `target` lo está introduciendo el usuario, y lo está concatenando
 
 ![Screenshot 2024-11-25 at 18.01.16.png](image/image_03.png)
 
-Vemos que el ping lo ha hecho a [`root.greita.numa.host`](http://root.greita.numa.host), `root` es directamente la salida de `($whoami)`, por lo que podremos interactuar directamente con la máquina.
+Vemos que el ping lo ha hecho a `root.greita.numa.host`, `root` es directamente la salida de `($whoami)`, por lo que podremos interactuar directamente con la máquina.
 
 El archivo `Dockerfile` vemos que esta copiando el archivo `flag.txt` al `WORKDIR` por lo que al hacer `cat flag.txt` podremos leer el archivo.
 
