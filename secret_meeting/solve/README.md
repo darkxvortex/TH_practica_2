@@ -73,7 +73,7 @@ while True:
 
 Tras ejecutarlo, obtenemos lo siguiente:
 
-[Screen Recording 2024-11-25 at 23.14.38.mov](image/vid_01.mov)
+[Screen Recording 2024-11-25 at 23.14.38.gif](image/vid_01.gif)
 
 Está claro que al hacerlo de manera local, no encontramos la flag real del reto. Modificando las lineas del script, en las cuales realiza la conexión a la web de login, ponemos la proporcionada por el CTFd, y tras un rato, nos devuelve la siguiente flag:
 
