@@ -1,0 +1,9 @@
+flask
+flask-login
+wtforms
+Flask-SQLAlchemy
+pymysql
+selenium
+rq
+redis
+Flask-WTF
