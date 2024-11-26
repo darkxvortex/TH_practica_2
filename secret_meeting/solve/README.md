@@ -90,6 +90,9 @@ El problema viene dado porque ya no puede continuar comprobando. En este punto, 
 Al final averiguo que faltaba el punto en la wordlist, por lo que tras ejecutar el script de nuevo con el punto incluido, obtenemos lo siguiente:
 
 
+`URJC{4ut0m4t1z4l0_0_sufr3_l4s_c0ns3cu3nc14s.3n_s3r10.N0_l0_h4ga5_A_m4n0.3n_un_lug4r_d3_j4ck3rl4nd1a_cuyo_n0mbre_NO_t3ng0_3n_c4che.v1vi4_un_ju4k3rit0_d3_b0ton_g0rdO}`
+
+
 
 
 Probing with: ^URJC{4ut0m4t1z4l0_0_sufr3_l4s_c0ns3cu3nc14s.3n_s3r10.N0_l0_h4ga5_A_m4n0.3n5.*
