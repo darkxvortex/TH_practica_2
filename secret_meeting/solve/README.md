@@ -86,3 +86,11 @@ El token, es un código único, el cual es el que nos falta en este reto, pues u
 La página web nos devuelve el código de estado `401 Unauthorized`.
 
 El problema viene dado porque ya no puede continuar comprobando. En este punto, ninguna letra, ni minuscula ni ningun número da una petición `200 OK`.
+
+Al final averiguo que faltaba el punto en la wordlist, por lo que tras ejecutar el script de nuevo con el punto incluido, obtenemos lo siguiente:
+
+
+
+
+Probing with: ^URJC{4ut0m4t1z4l0_0_sufr3_l4s_c0ns3cu3nc14s.3n_s3r10.N0_l0_h4ga5_A_m4n0.3n5.*
+Status code: 401
