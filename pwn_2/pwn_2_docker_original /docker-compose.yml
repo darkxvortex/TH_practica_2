@@ -1,7 +1,7 @@
 services:
   pwnthemallagain:
     build: .
-    platform: linux/amd64
+    platform: linux/arm64
     restart: on-failure
     ports:
       - 9992:9992
