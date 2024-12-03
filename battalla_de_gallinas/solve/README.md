@@ -12,7 +12,7 @@ Si intentamos registarnos con el usuario `admin` no nos deja, porque ya existe e
 
 Nos creamos un usuario, y vemos que podemos subir un poema, y hacer que un administrador lo revise.
 
-![image.png](images/images_02.png)
+![image.png](images/image_02.png)
 
 Con burpsuit, podemos analizar que hace la web cuando le damos al boton `Request poem review`, y este lo que hace es pasar los siguientes parámetros a `http://0.0.0.0:12105/visit`
 
