@@ -114,9 +114,7 @@ Con este script vemos que el admin esta visualizando correctamente nuestro poema
 
 ![Screenshot 2024-12-02 at 09.55.03.png](images/image_05.png)
 
-Realmente, lo que queremos hacer es en vez de cargar el HTML, debemos cargar la cookie de admin, porque ahora mismo el bot, está como administrador porque puede acceder a la web `http://localhost:12105/poem/?username=a35`
-
-Al hacer las peticiones, no se nos carga de manera correcta pues siemrpe nos cargará nuestro usuario. Al final llegamos a la conclusión de que no hay que decirle al bot que visite `/poem/?username=admin`. Por lo tanto nos quedará el script de la siguiente manera:
+Vemos que aun así nos carga nuestro html en vez del administrador. Como el bot directamente está como administrador no hará falta pedirle que visite `/poem/?username=admin` sino que lo hará directamente, por lo que modificando el script anterior, para que una vez el bot visite su pagina, cargemos el html y lo pasemos al servidor controlado, quedando el siguiente script:
 
 ```python
 <script>
