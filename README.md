@@ -1,2 +1,2 @@
-# TH_practica_2
+# Técnicas de Hacking - Práctica 2
  
