@@ -140,7 +140,7 @@ Vemos que aun así nos carga nuestro html en vez del administrador. Como el bot 
 </script>
 ```
 
-Con esto conseguimos ver cual es la flag.
+Para el servidor, debido a algunos problemas decido usar ngrok para enviar las peticiones, pudiendo ver definitivamente la flag.
 
 ![image.png](images/image_06.png)
 
